@@ -1,0 +1,1150 @@
+/* ==========================================================================
+   PropTech / EduFunnel Dashboard — Portal Kuesioner & Data Input
+   Style: Modern, Clean & High-End Analytics Dashboard Web App
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand / Primary Palette */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-200: #bfdbfe;
+  --primary-400: #60a5fa;
+  --primary-500: #3b82f6;
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
+  --primary-ring: rgba(37, 99, 235, 0.22);
+
+  /* Secondary & Neutral Palette (Slate) */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Accent & Feedback Colors */
+  --success-50: #ecfdf5;
+  --success-100: #d1fae5;
+  --success-500: #10b981;
+  --success-600: #059669;
+  --success-700: #047857;
+
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  --error-700: #b91c1c;
+
+  --warning-50: #fffbeb;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+
+  /* Typography & Sizing */
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-sm: 0 2px 4px -1px rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--slate-100);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--slate-800);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 32px 16px 64px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Page Layout & Wrapper (Max 760px Centered)
+   -------------------------------------------------------------------------- */
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.portal-container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Header Component
+   -------------------------------------------------------------------------- */
+.portal-header {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-600), #38bdf8, var(--success-500));
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  text-decoration: none;
+  padding: 7px 14px;
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-back:hover {
+  color: var(--primary-600);
+  background-color: var(--primary-50);
+  border-color: var(--primary-200);
+  transform: translateX(-2px);
+}
+
+.btn-back .icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.btn-back:hover .icon {
+  transform: translateX(-2px);
+}
+
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--slate-600);
+  background-color: var(--slate-100);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--slate-200);
+}
+
+.dot-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--success-500);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-600);
+  background-color: var(--primary-50);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.icon-brand {
+  width: 16px;
+  height: 16px;
+}
+
+.portal-title {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.portal-description {
+  font-size: 0.9375rem;
+  color: var(--slate-600);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   5. Alert Banner (Status Messages)
+   -------------------------------------------------------------------------- */
+.status-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  animation: slideDown 250ms ease-out forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.status-alert.hidden {
+  display: none;
+}
+
+.status-alert.success {
+  background-color: var(--success-50);
+  border: 1px solid var(--success-100);
+  color: var(--success-700);
+}
+
+.status-alert.error {
+  background-color: var(--error-50);
+  border: 1px solid var(--error-100);
+  color: var(--error-700);
+}
+
+.status-alert.warning {
+  background-color: var(--warning-50);
+  border: 1px solid #fde68a;
+  color: var(--warning-600);
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+}
+
+.alert-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin-bottom: 3px;
+}
+
+.alert-message {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.alert-close {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: opacity var(--transition-fast);
+}
+
+.alert-close:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   6. Form Cards & Structure
+   -------------------------------------------------------------------------- */
+.form-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.form-card:hover {
+  border-color: var(--slate-300);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 28px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.section-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 3px 6px rgba(37, 99, 235, 0.25);
+  flex-shrink: 0;
+}
+
+.section-meta {
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  line-height: 1.4;
+}
+
+.card-body {
+  padding: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   7. Bagian A: Form Controls & Inputs
+   -------------------------------------------------------------------------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.required-star {
+  color: var(--error-500);
+  font-weight: 700;
+}
+
+.input-wrapper,
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: var(--slate-400);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.form-control {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--slate-800);
+  background-color: #ffffff;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 11px 16px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.input-wrapper .form-control {
+  padding-left: 42px;
+}
+
+.select-wrapper select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 42px;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  color: var(--slate-400);
+  pointer-events: none;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 4px var(--primary-ring);
+}
+
+.input-wrapper:focus-within .input-icon,
+.select-wrapper:focus-within .select-arrow {
+  color: var(--primary-600);
+}
+
+.form-group.has-error .form-control {
+  border-color: var(--error-500);
+  background-color: #fff9f9;
+}
+
+.form-group.has-error .form-control:focus {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
+}
+
+.field-error {
+  font-size: 0.775rem;
+  color: var(--error-600);
+  font-weight: 500;
+  min-height: 16px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   8. Bagian B: Meta Bar, Scale Guide & Likert System
+   -------------------------------------------------------------------------- */
+.sus-meta-bar {
+  background-color: var(--slate-50);
+  border-bottom: 1px solid var(--slate-200);
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.progress-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+}
+
+.progress-title {
+  font-weight: 700;
+  color: var(--slate-700);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.progress-value {
+  font-weight: 700;
+  color: var(--primary-600);
+  background: var(--primary-50);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--primary-200);
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--slate-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+  border-radius: var(--radius-full);
+  transition: width 300ms ease;
+}
+
+.scale-guide-card {
+  background-color: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.guide-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-600);
+}
+
+.guide-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.guide-pill {
+  font-size: 0.775rem;
+  color: var(--slate-600);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.guide-pill .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: var(--slate-100);
+  border: 1px solid var(--slate-300);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  color: var(--slate-800);
+}
+
+/* SUS Questions List */
+.sus-questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+}
+
+.sus-item {
+  background: #ffffff;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  transition: all var(--transition-fast);
+}
+
+.sus-item:hover {
+  border-color: var(--slate-300);
+  background-color: #fdfefe;
+}
+
+.sus-item.answered {
+  border-color: var(--primary-200);
+  background-color: rgba(239, 246, 255, 0.25);
+}
+
+.sus-item.error {
+  border-color: var(--error-500);
+  background-color: #fffaf9;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.sus-item-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sus-badge {
+  font-size: 0.725rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-700);
+  background-color: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sus-item.answered .sus-badge {
+  background-color: var(--primary-600);
+  color: #ffffff;
+  border-color: var(--primary-600);
+}
+
+.sus-statement {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  line-height: 1.5;
+}
+
+/* Likert Group Interaction */
+.likert-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.likert-anchor-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--slate-500);
+  width: 110px;
+  line-height: 1.25;
+}
+
+.likert-anchor-label.left {
+  text-align: left;
+}
+
+.likert-anchor-label.right {
+  text-align: right;
+}
+
+.likert-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.likert-label {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hide native radio but keep focusable */
+.likert-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.likert-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.cell-num {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  line-height: 1.1;
+}
+
+.cell-txt {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--slate-400);
+  text-transform: uppercase;
+}
+
+/* Hover and Checked states */
+.likert-label:hover .likert-cell {
+  border-color: var(--primary-400);
+  background-color: var(--primary-50);
+  transform: translateY(-1px);
+}
+
+.likert-label:hover .cell-num {
+  color: var(--primary-700);
+}
+
+.likert-label input[type="radio"]:focus-visible + .likert-cell {
+  outline: 2px solid var(--primary-600);
+  outline-offset: 2px;
+}
+
+.likert-label input[type="radio"]:checked + .likert-cell {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  border-color: var(--primary-700);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+.likert-label input[type="radio"]:checked + .likert-cell .cell-num {
+  color: #ffffff;
+}
+
+.likert-label input[type="radio"]:checked + .likert-cell .cell-txt {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sus-field-error {
+  font-size: 0.775rem;
+  color: var(--error-600);
+  font-weight: 500;
+  margin-top: 8px;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   9. Actions & Submit Card
+   -------------------------------------------------------------------------- */
+.form-actions-card {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  padding: 22px 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.actions-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.secure-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--slate-500);
+}
+
+.secure-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--success-600);
+  flex-shrink: 0;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-800));
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--slate-700);
+  border-color: var(--slate-200);
+}
+
+.btn-secondary:hover {
+  background-color: var(--slate-50);
+  border-color: var(--slate-300);
+  color: var(--slate-900);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Spinner for Loading State */
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  display: inline-block;
+}
+
+.btn-spinner.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   10. Portal Footer
+   -------------------------------------------------------------------------- */
+.portal-footer {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--slate-400);
+  padding: 12px 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.portal-footer a {
+  color: var(--slate-500);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.portal-footer a:hover {
+  color: var(--primary-600);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   11. Modal Backdrop & Dialog
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.modal-backdrop.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  max-width: 480px;
+  width: 100%;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-backdrop.hidden .modal-card {
+  transform: scale(0.92);
+}
+
+.modal-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-icon-circle.success {
+  background-color: var(--success-100);
+  color: var(--success-600);
+}
+
+.modal-icon-circle svg {
+  width: 32px;
+  height: 32px;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-bottom: 8px;
+}
+
+.modal-desc {
+  font-size: 0.9rem;
+  color: var(--slate-600);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.modal-summary {
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.825rem;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-summary-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--slate-600);
+}
+
+.modal-summary-row strong {
+  color: var(--slate-800);
+}
+
+.sus-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-700);
+  background-color: var(--primary-100);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-btn {
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 680px) {
+  body {
+    padding: 16px 12px 48px;
+  }
+
+  .portal-header {
+    padding: 20px;
+  }
+
+  .portal-title {
+    font-size: 1.35rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-header {
+    padding: 18px 20px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .sus-meta-bar {
+    padding: 16px 20px;
+  }
+
+  .sus-questions-list {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .sus-item {
+    padding: 16px 14px;
+  }
+
+  /* Optimize Likert layout for smaller viewports */
+  .likert-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .likert-anchor-label {
+    width: 100%;
+    font-size: 0.72rem;
+  }
+
+  .likert-anchor-label.left {
+    text-align: left;
+  }
+
+  .likert-anchor-label.right {
+    text-align: right;
+  }
+
+  .likert-options {
+    justify-content: space-between;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .likert-cell {
+    width: 100%;
+    max-width: 58px;
+    height: 44px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+}
