@@ -1,6 +1,6 @@
 
 const SUPABASE_URL = "https://hknolhwqrhikijilqmdv.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_ptNdPgdUNE-9_8D98dNoQ_pLoWx_JZ";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhrbm9saHdxcmhpa2lqaWxxbWR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwNzkwNDMsImV4cCI6MjExMDY1NTA0M30.jaa5yl_5p1OhX_u_3kkajmcnCPUuhsMIQubhP8U2GfI";
 
 // URL Webhook produksi n8n
 const N8N_EMAIL_WEBHOOK_URL =
