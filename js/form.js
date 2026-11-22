@@ -1,9 +1,8 @@
 
 const SUPABASE_URL = "https://hknolhwqrhikijilqmdv.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_ptNdPgdUNE-9_8D98dNo-Q_pLoWx_JZ";
+const SUPABASE_ANON_KEY = "sb_publishable_ptNdPgdUNE-9_8D98dNoQ_pLoWx_JZ";
 
-// URL Webhook n8n
-// localhost hanya berlaku jika website dijalankan di komputer yang sama
+// URL Webhook produksi n8n
 const N8N_EMAIL_WEBHOOK_URL =
   "https://bobbed-unicycle-retry.ngrok-free.dev/webhook/sus-email-notification";
 
@@ -38,7 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (!selected) {
-        console.error(`Jawaban pertanyaan ${i + 1} belum dipilih.`);
+        console.error(
+          `Jawaban pertanyaan ${i + 1} belum dipilih.`
+        );
         return null;
       }
 
@@ -67,28 +68,38 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Mengirim notifikasi email ke n8n
+  // Mengirim notifikasi email melalui n8n
   async function sendEmailNotification(data) {
     try {
-      const response = await fetch(N8N_EMAIL_WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+      const body = new URLSearchParams({
+        nama: data.nama,
+        peran: data.peran,
+        sumber_trafik: data.sumber_trafik,
+        tahap_funnel: data.tahap_funnel,
+        jawaban: JSON.stringify(data.jawaban),
+        skor_sus: String(data.skor_sus)
       });
 
-      if (!response.ok) {
-        throw new Error(
-          `Webhook gagal dengan status ${response.status}`
-        );
-      }
+      await fetch(N8N_EMAIL_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: body
+      });
 
-      console.log("Notifikasi email berhasil dikirim.");
-      return true;
+      console.log(
+        "Permintaan notifikasi sudah dikirim ke n8n. Periksa Executions untuk memastikan email berhasil."
+      );
+
+      // Tidak bisa memastikan email terkirim karena respons
+      // tidak dapat dibaca dalam mode no-cors.
+      return "unknown";
 
     } catch (error) {
-      console.error("Gagal mengirim notifikasi email:", error);
+      console.error(
+        "Gagal mengirim notifikasi email:",
+        error
+      );
+
       return false;
     }
   }
@@ -152,14 +163,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Validasi identitas
       if (!nama || !peran || !sumber_trafik || !tahap_funnel) {
-        throw new Error("Mohon lengkapi seluruh data responden.");
+        throw new Error(
+          "Mohon lengkapi seluruh data responden."
+        );
       }
 
       // 2. Mengambil jawaban SUS
       const answers = getAnswers();
 
       if (!answers) {
-        throw new Error("Mohon jawab seluruh 10 pertanyaan SUS.");
+        throw new Error(
+          "Mohon jawab seluruh 10 pertanyaan SUS."
+        );
       }
 
       console.log("Jawaban SUS:", answers);
@@ -190,23 +205,25 @@ document.addEventListener("DOMContentLoaded", () => {
         throw error;
       }
 
-      console.log("Data berhasil disimpan ke Supabase.");
+      console.log(
+        "Data berhasil disimpan ke Supabase."
+      );
 
       // 6. Mengirim notifikasi email melalui n8n
-      const emailSent = await sendEmailNotification(record);
+      const emailStatus = await sendEmailNotification(record);
 
-      // 7. Menampilkan hasil pengiriman
-      if (emailSent) {
+      // 7. Menampilkan hasil
+      if (emailStatus === "unknown") {
         showAlert(
           "success",
-          "Pengiriman Berhasil!",
-          `Data kuesioner atas nama ${escapeHtml(nama)} berhasil disimpan dan notifikasi email berhasil dikirim.`
+          "Data Berhasil Disimpan!",
+          `Data kuesioner atas nama ${escapeHtml(nama)} berhasil disimpan. Permintaan notifikasi sudah dikirim ke n8n. Status email perlu diperiksa melalui workflow n8n.`
         );
       } else {
         showAlert(
           "success",
           "Data Berhasil Disimpan!",
-          `Data kuesioner atas nama ${escapeHtml(nama)} berhasil disimpan ke database, tetapi notifikasi email gagal dikirim.`
+          `Data kuesioner atas nama ${escapeHtml(nama)} berhasil disimpan, tetapi permintaan notifikasi email gagal dikirim.`
         );
       }
 
@@ -219,13 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
 
     } catch (error) {
-      console.error("Terjadi kesalahan:", error);
+      console.error(
+        "Terjadi kesalahan:",
+        error
+      );
 
       showAlert(
         "danger",
         "Pengiriman Gagal!",
         escapeHtml(
-          error.message || "Terjadi kesalahan saat mengirim data."
+          error.message ||
+          "Terjadi kesalahan saat mengirim data."
         )
       );
 
