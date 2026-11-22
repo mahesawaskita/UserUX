@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Kuesioner SUS & Data Funnel — PropTech Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <div class="page-wrapper">
     <!-- Main Form Container (Max 760px) -->
     <main class="portal-container">
-      
+
       <!-- Top Navigation & Header -->
       <header class="portal-header">
         <div class="header-nav">
           <a href="#" class="btn-back" id="backToDashboardBtn" title="Kembali ke Dashboard Utama">
             <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+              <path fill-rule="evenodd"
+                d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
+                clip-rule="evenodd" />
             </svg>
             <span>Kembali ke Dashboard Utama</span>
           </a>
@@ -32,13 +37,15 @@
         <div class="header-titles">
           <div class="brand-badge">
             <svg class="icon-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
             <span>Form Portal & Evaluasi Pengguna</span>
           </div>
           <h1 class="portal-title">Input Data Prospek & Kuesioner SUS</h1>
           <p class="portal-description">
-            Kumpulkan data identitas funnel properti dan berikan penilaian kegunaan platform melalui 10 instrumen standar <em>System Usability Scale</em> (SUS) untuk optimasi pengalaman PropTech / EduFunnel.
+            Kumpulkan data identitas funnel properti dan berikan penilaian kegunaan platform melalui 10 instrumen
+            standar <em>System Usability Scale</em> (SUS) untuk optimasi pengalaman PropTech / EduFunnel.
           </p>
         </div>
       </header>
@@ -55,7 +62,7 @@
 
       <!-- Main Form -->
       <form id="susForm" novalidate>
-        
+
         <!-- BAGIAN A: Identitas & Data Funnel Properti -->
         <section class="form-card" id="sectionA">
           <div class="card-header">
@@ -74,17 +81,11 @@
               </label>
               <div class="input-wrapper">
                 <svg class="input-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                  <path
+                    d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
                 </svg>
-                <input 
-                  type="text" 
-                  id="nama" 
-                  name="nama" 
-                  class="form-control" 
-                  placeholder="Masukkan nama lengkap Anda (cth: Arya Wiratama)" 
-                  autocomplete="name"
-                  required
-                >
+                <input type="text" id="nama" name="nama" class="form-control"
+                  placeholder="Masukkan nama lengkap Anda (cth: Arya Wiratama)" autocomplete="name" required>
               </div>
               <small class="field-error" id="error-nama"></small>
             </div>
@@ -103,7 +104,9 @@
                   <option value="Pimpinan">Pimpinan</option>
                 </select>
                 <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <small class="field-error" id="error-peran"></small>
@@ -123,7 +126,9 @@
                   <option value="Referensi">Referensi</option>
                 </select>
                 <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <small class="field-error" id="error-sumber_trafik"></small>
@@ -144,7 +149,9 @@
                   <option value="Advocacy">Advocacy (Merekomendasikan Properti ke Relasi / Member Get Member)</option>
                 </select>
                 <svg class="select-arrow" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd" />
                 </svg>
               </div>
               <small class="field-error" id="error-tahap_funnel"></small>
@@ -159,7 +166,8 @@
             <div class="section-meta">
               <h2 class="card-title">Kuesioner Evaluasi Kegunaan (SUS)</h2>
               <p class="card-subtitle">
-                Standar <em>System Usability Scale</em> (SUS). Berikan penilaian sejujurnya berdasarkan pengalaman Anda menggunakan platform ini.
+                Standar <em>System Usability Scale</em> (SUS). Berikan penilaian sejujurnya berdasarkan pengalaman Anda
+                menggunakan platform ini.
               </p>
             </div>
           </div>
@@ -179,7 +187,9 @@
             <div class="scale-guide-card">
               <div class="guide-title">
                 <svg class="guide-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                    clip-rule="evenodd" />
                 </svg>
                 <span>Petunjuk Skala Likert:</span>
               </div>
@@ -195,12 +205,13 @@
 
           <!-- SUS Questions List Container (Filled dynamically/statically) -->
           <div class="card-body sus-questions-list" id="susQuestionsContainer">
-            
+
             <!-- Butir 1 -->
             <div class="sus-item" id="sus-item-0" data-index="0">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 01</span>
-                <p class="sus-statement">Saya merasa akan sering menggunakan platform dan dashboard properti ini untuk kebutuhan pencarian atau manajemen properti.</p>
+                <p class="sus-statement">Saya merasa akan sering menggunakan platform dan dashboard properti ini untuk
+                  kebutuhan pencarian atau manajemen properti.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 1">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -250,7 +261,8 @@
             <div class="sus-item" id="sus-item-1" data-index="1">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 02</span>
-                <p class="sus-statement">Saya merasa platform ini terlalu rumit dan kompleks untuk digunakan dalam mencari informasi atau mengelola transaksi properti.</p>
+                <p class="sus-statement">Saya merasa platform ini terlalu rumit dan kompleks untuk digunakan dalam
+                  mencari informasi atau mengelola transaksi properti.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 2">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -285,7 +297,8 @@
             <div class="sus-item" id="sus-item-2" data-index="2">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 03</span>
-                <p class="sus-statement">Saya merasa platform properti ini sangat mudah dipahami dan digunakan oleh pengguna baru sekalipun.</p>
+                <p class="sus-statement">Saya merasa platform properti ini sangat mudah dipahami dan digunakan oleh
+                  pengguna baru sekalipun.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 3">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -320,7 +333,8 @@
             <div class="sus-item" id="sus-item-3" data-index="3">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 04</span>
-                <p class="sus-statement">Saya merasa membutuhkan bantuan teknis dari tim support atau orang lain agar dapat mengoperasikan platform ini secara lancar.</p>
+                <p class="sus-statement">Saya merasa membutuhkan bantuan teknis dari tim support atau orang lain agar
+                  dapat mengoperasikan platform ini secara lancar.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 4">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -355,7 +369,8 @@
             <div class="sus-item" id="sus-item-4" data-index="4">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 05</span>
-                <p class="sus-statement">Saya menemukan bahwa berbagai fitur dalam sistem (katalog properti, kalkulator KPR, formulir funnel) terintegrasi dengan sangat baik.</p>
+                <p class="sus-statement">Saya menemukan bahwa berbagai fitur dalam sistem (katalog properti, kalkulator
+                  KPR, formulir funnel) terintegrasi dengan sangat baik.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 5">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -390,7 +405,8 @@
             <div class="sus-item" id="sus-item-5" data-index="5">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 06</span>
-                <p class="sus-statement">Saya merasa ada terlalu banyak inkonsistensi atau ketidakseragaman tampilan dan alur interaksi dalam platform ini.</p>
+                <p class="sus-statement">Saya merasa ada terlalu banyak inkonsistensi atau ketidakseragaman tampilan dan
+                  alur interaksi dalam platform ini.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 6">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -425,7 +441,8 @@
             <div class="sus-item" id="sus-item-6" data-index="6">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 07</span>
-                <p class="sus-statement">Saya merasa kebanyakan orang (klien maupun agen properti) akan mampu mempelajari dan menguasai platform ini dengan sangat cepat.</p>
+                <p class="sus-statement">Saya merasa kebanyakan orang (klien maupun agen properti) akan mampu
+                  mempelajari dan menguasai platform ini dengan sangat cepat.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 7">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -460,7 +477,8 @@
             <div class="sus-item" id="sus-item-7" data-index="7">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 08</span>
-                <p class="sus-statement">Saya merasa antarmuka dan proses navigasi pada sistem platform ini sangat membingungkan saat dicoba.</p>
+                <p class="sus-statement">Saya merasa antarmuka dan proses navigasi pada sistem platform ini sangat
+                  membingungkan saat dicoba.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 8">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -495,7 +513,8 @@
             <div class="sus-item" id="sus-item-8" data-index="8">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 09</span>
-                <p class="sus-statement">Saya merasa sangat percaya diri dan yakin ketika menggunakan fitur-fitur yang ada di dalam platform ini.</p>
+                <p class="sus-statement">Saya merasa sangat percaya diri dan yakin ketika menggunakan fitur-fitur yang
+                  ada di dalam platform ini.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 9">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -530,7 +549,8 @@
             <div class="sus-item" id="sus-item-9" data-index="9">
               <div class="sus-item-header">
                 <span class="sus-badge">Butir 10</span>
-                <p class="sus-statement">Saya merasa harus mempelajari banyak hal terlebih dahulu sebelum mampu menggunakan platform ini dengan efektif.</p>
+                <p class="sus-statement">Saya merasa harus mempelajari banyak hal terlebih dahulu sebelum mampu
+                  menggunakan platform ini dengan efektif.</p>
               </div>
               <div class="likert-group" role="radiogroup" aria-label="Pertanyaan SUS Butir 10">
                 <div class="likert-anchor-label left">Sangat Tidak Setuju</div>
@@ -569,14 +589,18 @@
           <div class="actions-meta">
             <div class="secure-badge">
               <svg class="secure-icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                  d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                  clip-rule="evenodd" />
               </svg>
-              <span>Data dikirim langsung ke automasi n8n webhook secara terenkripsi (SSL/TLS).</span>
+              <span>Data dikirim langsung ke Supabase secara aman melalui koneksi HTTPS.</span>
             </div>
             <div class="action-buttons">
               <button type="button" class="btn btn-secondary" id="resetBtn">
                 <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.75a.75.75 0 00-.75.75v4.482a.75.75 0 001.5 0v-2.128l.424.425a7 7 0 0011.758-3.17.75.75 0 00-1.37-.514zM4.688 8.576a5.5 5.5 0 019.201-2.466l.312.311h-2.433a.75.75 0 000 1.5h4.482a.75.75 0 00.75-.75V2.689a.75.75 0 00-1.5 0v2.128l-.424-.425a7 7 0 00-11.758 3.17.75.75 0 001.37.514z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.75a.75.75 0 00-.75.75v4.482a.75.75 0 001.5 0v-2.128l.424.425a7 7 0 0011.758-3.17.75.75 0 00-1.37-.514zM4.688 8.576a5.5 5.5 0 019.201-2.466l.312.311h-2.433a.75.75 0 000 1.5h4.482a.75.75 0 00.75-.75V2.689a.75.75 0 00-1.5 0v2.128l-.424-.425a7 7 0 00-11.758 3.17.75.75 0 001.37.514z"
+                    clip-rule="evenodd" />
                 </svg>
                 <span>Reset Form</span>
               </button>
@@ -584,7 +608,9 @@
               <button type="submit" class="btn btn-primary" id="submitBtn">
                 <span class="btn-spinner hidden" id="btnSpinner"></span>
                 <svg class="btn-icon" id="btnSubmitIcon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clip-rule="evenodd" />
                 </svg>
                 <span id="btnSubmitText">Kirim Data & Kuesioner</span>
               </button>
@@ -598,8 +624,8 @@
       <footer class="portal-footer">
         <p>&copy; 2026 PropTech EduFunnel Management System. All rights reserved.</p>
         <p class="footer-links">
-          <a href="#">Dokumentasi Teknis</a> &bull; 
-          <a href="#">Privasi & Data</a> &bull; 
+          <a href="#">Dokumentasi Teknis</a> &bull;
+          <a href="#">Privasi & Data</a> &bull;
           <a href="#">Status Sistem</a>
         </p>
       </footer>
@@ -617,7 +643,8 @@
       </div>
       <h3 class="modal-title" id="modalTitle">Data Berhasil Terkirim!</h3>
       <p class="modal-desc" id="modalMessage">
-        Terima kasih, data funnel dan 10 butir kuesioner SUS Anda telah sukses diterima oleh webhook n8n untuk pemrosesan dashboard analytics.
+        Terima kasih, data funnel dan 10 butir kuesioner SUS Anda telah sukses disimpan ke Supabase untuk pemrosesan
+        dashboard analytics.
       </p>
 
       <div class="modal-summary" id="modalSummary">
@@ -631,6 +658,15 @@
     </div>
   </div>
 
+  <!-- Supabase JS: load before form.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Fallback CDN if jsDelivr did not load -->
+  <script>
+    if (!window.supabase) {
+      document.write('<script src="https://unpkg.com/@supabase/supabase-js@2"><\/script>');
+    }
+  </script>
   <script src="js/form.js"></script>
 </body>
+
 </html>

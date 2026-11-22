@@ -1,8 +1,18 @@
 // ============================================================================
-// KONFIGURASI WEBHOOK n8n
-// Ganti URL di bawah ini dengan URL Webhook Production/Test n8n aktif Anda
+// KONFIGURASI SUPABASE
+// Ganti placeholder dengan Publishable Key dari project Supabase milik Anda.
+// Jangan pernah memasukkan Secret Key / service_role key ke frontend.
 // ============================================================================
-const N8N_WEBHOOK_URL = "https://URL-N8N-ANDA/webhook/kuesioner-sus";
+const SUPABASE_URL = "https://hknolhwqrhikijilqmdv.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ptNdPgdUNE-9_8D98dNo-Q_pLoWx_JZ";
+
+if (!window.supabase) {
+  console.error("Supabase JS library belum dimuat. Periksa script CDN di index.html.");
+}
+
+const supabaseClient = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+  : null;
 
 // ============================================================================
 // INISIALISASI ELEMEN DOM
@@ -120,31 +130,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================================================
-  // LOGIKA PENGIRIMAN FORMULIR (SUBMIT HANDLER)
-  // ==========================================================================
+  // LOGIKA PENGIRIMAN FORMULIR KE SUPABASE
+  // ============================================================================
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     hideAlert();
 
-    // 1. Validasi Sisi Klien
+    // 1. Validasi sisi klien
     const validationResult = validateFormData();
 
     if (!validationResult.isValid) {
-      // Tampilkan pesan peringatan yang jelas dan batalkan pengiriman
       showAlert(
         "error",
         "Formulir Belum Lengkap",
         validationResult.errorMessage
       );
 
-      // Scroll ke elemen pertama yang belum lengkap
       if (validationResult.firstErrorElement) {
         validationResult.firstErrorElement.scrollIntoView({
           behavior: "smooth",
           block: "center"
         });
 
-        // Fokus ke input jika memungkinkan
         if (typeof validationResult.firstErrorElement.focus === "function") {
           validationResult.firstErrorElement.focus();
         }
@@ -152,7 +159,25 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Siapkan Payload JSON sesuai spesifikasi
+    if (!supabaseClient) {
+      showAlert(
+        "error",
+        "Supabase Belum Siap",
+        "Library Supabase belum berhasil dimuat. Periksa koneksi internet dan script CDN di index.html."
+      );
+      return;
+    }
+
+    if (SUPABASE_PUBLISHABLE_KEY === "MASUKKAN_PUBLISHABLE_KEY_KAMU") {
+      showAlert(
+        "error",
+        "Publishable Key Belum Diisi",
+        "Buka file js/form.js lalu ganti nilai SUPABASE_PUBLISHABLE_KEY dengan Publishable Key project Supabase milikmu."
+      );
+      return;
+    }
+
+    // Hitung skor SUS sebelum data disimpan
     const payload = {
       nama: validationResult.data.nama,
       peran: validationResult.data.peran,
@@ -160,90 +185,55 @@ document.addEventListener("DOMContentLoaded", () => {
       tahap_funnel: validationResult.data.tahap_funnel,
       jawaban: validationResult.data.jawaban
     };
+    const calculatedSus = calculateSusScore(payload.jawaban);
 
-    console.log("Mengirim payload ke n8n webhook:", payload);
+    // Nama kolom disesuaikan dengan tabel public.kuesioner_sus
+    const record = {
+      nama: payload.nama,
+      peran: payload.peran,
+      sumber_trafik: payload.sumber_trafik,
+      tahap_funnel: payload.tahap_funnel,
+      jawaban: payload.jawaban,
+      skor_sus: calculatedSus.score
+    };
 
-    // 2. Aktifkan State Loading pada Tombol Kirim
+    console.log("Mengirim data kuesioner ke Supabase:", record);
     setLoadingState(true);
 
     try {
-      // 3. Kirim data menggunakan fetch() dengan POST & Application/JSON
-      const response = await fetch(N8N_WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      const { error } = await supabaseClient
+        .from("kuesioner_sus")
+        .insert([record]);
 
-      // Status 200 - 299
-      if (response.ok) {
-        let responseData = {};
-        try {
-          responseData = await response.json();
-        } catch (_) {
-          // Tangani jika response n8n berupa teks kosong / text plain
-          responseData = { message: "Data diterima dengan sukses oleh workflow n8n." };
-        }
-
-        // Hitung estimasi skor SUS (Standard System Usability Scale Formula)
-        const calculatedSus = calculateSusScore(payload.jawaban);
-
-        // Tampilkan pesan sukses dan modal ringkasan
-        showAlert(
-          "success",
-          "Pengiriman Berhasil!",
-          `Data kuesioner atas nama ${payload.nama} berhasil dikirim ke webhook n8n.`
-        );
-
-        showSuccessModal(payload, calculatedSus);
-
-        // Reset formulir setelah pengiriman berhasil
-        resetPortalForm();
-
-      } else {
-        // Status 400, 404, 500, dll.
-        const errorText = await response.text();
-        console.error("Respon Error dari Server:", response.status, errorText);
-
-        showAlert(
-          "error",
-          `Gagal Mengirim Data (Status: ${response.status})`,
-          `Webhook menolak pengiriman data. Detail: ${errorText || "Periksa konfigurasi node Webhook di n8n."}`
-        );
+      if (error) {
+        throw error;
       }
 
-    } catch (networkError) {
-      // Error Jaringan, CORS, atau Placeholder URL
-      console.error("Network or CORS Error:", networkError);
+      showAlert(
+        "success",
+        "Pengiriman Berhasil!",
+        `Data kuesioner atas nama ${escapeHtml(payload.nama)} berhasil disimpan ke Supabase.`
+      );
 
-      const isPlaceholderUrl = N8N_WEBHOOK_URL.includes("URL-N8N-ANDA");
-      
-      let messageDetail = `Terjadi kesalahan koneksi atau CORS saat menghubungi webhook (${networkError.message}).`;
-      
-      if (isPlaceholderUrl) {
-        messageDetail = `URL Webhook masih berupa placeholder (<strong>${N8N_WEBHOOK_URL}</strong>). Silakan buka file <code>js/form.js</code> dan ubah nilai variabel <code>N8N_WEBHOOK_URL</code> dengan alamat webhook n8n Anda.`;
+      showSuccessModal(payload, calculatedSus);
+      resetPortalForm();
+
+    } catch (submitError) {
+      console.error("Gagal menyimpan data ke Supabase:", submitError);
+
+      let messageDetail = submitError.message || "Terjadi kesalahan saat menyimpan data.";
+      if (submitError.code === "42501") {
+        messageDetail += " Periksa Row Level Security (RLS) dan policy INSERT pada tabel kuesioner_sus.";
+      } else if (submitError.code === "42P01") {
+        messageDetail += " Tabel public.kuesioner_sus belum ditemukan. Pastikan SQL pembuatan tabel sudah dijalankan.";
       }
 
       showAlert(
         "error",
-        "Gagal Menghubungi Webhook n8n",
-        messageDetail
+        "Gagal Menyimpan Data",
+        escapeHtml(messageDetail)
       );
-
-      // Value-add: Berikan opsi simulasi sukses jika pengguna sedang menguji coba secara lokal
-      if (isPlaceholderUrl) {
-        console.info(
-          "%c[INFO TESTING]%c Karena URL webhook masih placeholder, payload yang siap dikirim adalah:\n",
-          "background:#2563eb;color:#fff;padding:2px 6px;border-radius:4px;",
-          "color:#334155;font-weight:bold;",
-          payload
-        );
-      }
-
     } finally {
-      // 4. Kembalikan state tombol ke normal
       setLoadingState(false);
     }
   });
@@ -316,9 +306,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Pastikan array berisi tepat 10 jawaban angka 1-5
     if (unansweredQuestions.length > 0) {
-      const missingList = unansweredQuestions.slice(0, 3).join(", ") + 
+      const missingList = unansweredQuestions.slice(0, 3).join(", ") +
         (unansweredQuestions.length > 3 ? ` dan ${unansweredQuestions.length - 3} butir lainnya` : "");
-      
+
       errorMessage = `Terdapat ${unansweredQuestions.length} pertanyaan SUS yang belum dijawab (Butir: ${missingList}). Seluruh 10 butir wajib dinilai.`;
     }
 
@@ -410,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.disabled = true;
       btnSpinner.classList.remove("hidden");
       btnSubmitIcon.classList.add("hidden");
-      btnSubmitText.textContent = "Mengirim ke n8n...";
+      btnSubmitText.textContent = "Menyimpan ke Supabase...";
       submitBtn.classList.add("btn-loading");
     } else {
       submitBtn.disabled = false;
